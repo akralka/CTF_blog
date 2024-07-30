@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Frontend</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+    <h1>Hi there</h1>
+    <p>Tjis is main page.</p>
+    <a href="{{ url_for('login') }}">
+        <button id="myButton">Log In</button>
+    </a>
+    <a href="{{ url_for('sign_in') }}">
+        <button id="signInButton">Sign In</button>
+    </a>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
