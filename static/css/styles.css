@@ -1,0 +1,83 @@
+h1 {
+    color: #2d2d2d;
+    font-size: 35px;
+}
+
+h2 {
+    color: #2d2d2d;
+    font-size: 25px;
+    margin-top: 90px;
+}
+
+p {
+    color: #130306;
+    margin-top: 90px;
+    font-size: 25px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    /* margin-top: 50px; */
+    padding: 0;
+    text-align: center;
+}
+
+.task-bar {
+    background-color: #2d2d2d;
+    overflow: hidden;
+    position: absolute; /* wzgledem innych (1) */
+    top: 10%;
+    left: 20%;
+    width: 63%;
+    text-align: center;
+}
+
+.task-bar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.task-bar a:hover {  /* podswietlenie kafelków*/
+    background-color: #ddd;
+    color: black;
+}
+
+.login-form .form-group {
+    margin-bottom: 11px;
+}
+
+ .login-form label {
+    /* display: block; */  
+    margin-bottom: 3px;
+    margin-right: 0.28%;
+    color: #333;
+}
+
+.login-form input {
+    width: 9%;
+    margin-right: 80px;
+    padding: 9px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.login-form .btn {
+    width: 5.5%;
+    padding: 9px;
+    background-color: #1a86f9;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;  /* mozna poszalec */
+}
+
+.login-form .btn:hover {
+    background-color: #024fa2;
+}
