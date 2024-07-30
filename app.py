@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
 from models import db, User
 from sqlalchemy import text
 
@@ -8,6 +8,7 @@ def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] =  "sqlite:///data.db" #db_url or os.getenv("DATABASE_URL", "sqlite:///data.db")  # potem bez os bo bedą widzieli
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['UPLOAD_FOLDER'] = 'uploads'
     app.config['SECRET_KEY'] = 'aaa'
 
     # Inicjalizacja bazy danych
@@ -68,5 +69,9 @@ def create_app():
     @app.route('/success')
     def success():
         return 'Login successful! Welcome to the application.'
+    
+    @app.route('/uploads/<filename>')
+    def uploaded_file(filename):
+        return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
     return app
