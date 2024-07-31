@@ -10,14 +10,14 @@
   <body>
     <div class="task-bar">
         <a href="{{ url_for('home') }}">Home</a>
-        <a href="#">About Us</a>
+        <a href="{{ url_for('about') }}">About Us</a>
         <a href="{{ url_for('login') }}">Login</a>
         <a href="{{ url_for('sign_in') }}">Sign In</a>
     </div>
 
     <!-- Login Form -->
     <h1>Blog!</h1> 
-    <h2>LOGIN</h2>
+    <h2>Login</h2>
         <form action="{{ url_for('login') }}" method="post" class="login-form">
             <div class="form-group">
                 <label for="username">Username:</label>

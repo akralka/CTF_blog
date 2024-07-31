@@ -11,9 +11,22 @@ h2 {
 
 p {
     color: #130306;
-    margin-top: 90px;
     font-size: 25px;
 }
+
+p.nav {
+    margin-right: 750px;
+    margin-top: 130px;
+}
+
+p.ex1 {
+    margin-right: 450px;
+    font-size: 16px;
+  }
+
+  p.top {
+    margin-top: 90px;
+  }
 
 body {
     font-family: Arial, sans-serif;
@@ -85,5 +98,39 @@ body {
 img {
     border: 3px solid #ddd;
     max-width: 50%;
-    margin-left: 30px;
+}
+
+.main_image {
+    max-width: 50%;
+    margin-left: 28px;
+}
+
+.home_photos {
+    border: 3px solid #ddd;
+    max-width: 460px; 
+    cursor: pointer;
+    margin-top: 30px;
+    margin-left: 25px; 
+}
+
+.container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.row {
+    display: flex;
+    flex-direction: row; 
+}
+
+.caption {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #2d2d2d;
+    cursor: pointer;
+}
+
+.photo-container {
+    text-align: center;
 }

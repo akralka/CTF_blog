@@ -8,7 +8,7 @@ def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] =  "sqlite:///data.db" #db_url or os.getenv("DATABASE_URL", "sqlite:///data.db")  # potem bez os bo bedą widzieli
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['UPLOAD_FOLDER'] = 'uploads'
+    app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
     app.config['SECRET_KEY'] = 'aaa'
 
     # Inicjalizacja bazy danych
@@ -20,6 +20,10 @@ def create_app():
     @app.route('/')
     def home():
         return render_template('index.html')
+    
+    @app.route('/about')
+    def about():
+        return render_template('about.html')
 
     @app.route('/login', methods=['GET', 'POST'])
     def login():
@@ -35,7 +39,7 @@ def create_app():
             if user:
                 user = User.query.filter_by(login=username).first()
                 if user and user.password == password:
-                    return redirect(url_for('success'))
+                    return redirect(url_for('admin_account'))
                 else:
                     flash('Invalid password')
             else:
@@ -66,12 +70,17 @@ def create_app():
         else:
             return render_template('sign_in.html')
 
-    @app.route('/success')
-    def success():
-        return 'Login successful! Welcome to the application.'
+    # @app.route('/success')
+    # def success():
+    #     return 'Login successful! Welcome to the application.'
     
     @app.route('/uploads/<filename>')
     def uploaded_file(filename):
         return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+    
+    @app.route('/admin_account')
+    def admin_account():
+        return "Oh no! Admin forget to change his password!\n Here's your flag: flag={g0t_ya}"
+
 
     return app

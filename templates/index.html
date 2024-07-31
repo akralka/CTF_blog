@@ -8,15 +8,38 @@
 </head>
 <body>
     <h1>Welcome to my Blog!</h1>
-    <p></p>
+    <p class="top"></p>
     <div class="task-bar">
         <a href="{{ url_for('home') }}">Home</a>
-        <a href="#">About Us</a>
+        <a href="{{ url_for('about') }}">About Us</a>
         <a href="{{ url_for('login') }}">Log In</a>
         <a href="{{ url_for('sign_in') }}">Sign In</a>
     </div>
-
-    <img src="{{ url_for('uploaded_file', filename='blog_girl.png') }}" alt="Reload to obtain a photo!">
-    <!-- <script src="{{ url_for('static', filename='js/script.js') }}"></script> -->
+    <div class="container">
+        <img class="main_image" src="{{ url_for('uploaded_file', filename='blog_girl.png') }}" alt="Reload to obtain a photo!">
+        
+        <div class="row">
+            <div class="photo-container">
+                <img class="home_photos" src="{{ url_for('uploaded_file', filename='blog_girl.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/1')">
+                <p class="caption" onclick="navigateTo('/1')">Header 1</p>
+            </div>
+            <div class="photo-container">
+                <img class="home_photos" src="{{ url_for('uploaded_file', filename='blog_girl.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/2')">
+                <p class="caption" onclick="navigateTo('/2')">Header 2</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="photo-container">
+                <img class="home_photos" src="{{ url_for('uploaded_file', filename='blog_girl.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/3')">
+                <p class="caption" onclick="navigateTo('/3')">Header 3</p>
+            </div>
+            <div class="photo-container">
+                <img class="home_photos" src="{{ url_for('uploaded_file', filename='acc_rest.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/4')">
+                <p class="caption" onclick="navigateTo('/4')">Admin only!</p>
+            </div>
+        </div>
+        
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
