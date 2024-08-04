@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <div class="task-bar">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('about') }}">About Us</a>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('sign_in') }}">Sign In</a>
+        <form class="search-form" onsubmit="searchRedirect(event)">
+            <input type="text" placeholder="Search.." name="search" id="search-input" oninput="showSuggestions()">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        <div id="search-results" class="search-results"></div> 
+    </div>
+
+    <h1>Blog!</h1> 
+    <h2>What is cross-site scripting (XSS)?</h2>
+    <img class="main_image" src="{{ url_for('uploaded_file', filename='xss_2.png') }}" alt="Reload to obtain a photo!">
+    <p class="podtytul">XSS</p> 
+    <p class="ex1">tekst</p>
+    <p class="podtytul">Stored XSS</p> 
+    <p class="ex1">tekst</p>
+    <p class="podtytul">Reflected XSS</p> 
+    <p class="ex1">tekst</p>
+    <p class="podtytul">DOM-based XSS</p> 
+    <p class="ex1">tekst</p>
+    <p class="podtytul">Share what you think about that article!    </p> 
+    <style>
+        .comment-section {
+            margin-top: 50px;
+        }
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin-left: 27%;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .comment-form textarea {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            height: 100px;
+        }
+        .comment-form button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1a86f9;
+            color: #fff;
+            cursor: pointer;
+        }
+        .comment-form button:hover {
+            background-color: #024fa2;
+        } 
+        .comments {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 10px;
+            
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .comment {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+
+    <div class="comment-section">
+        <form class="comment-form" action="/xss" method="POST">
+            <textarea name="content" placeholder="Write your comment here..."></textarea>
+            <button type="submit">Submit</button>
+        </form>
+        <div class="comments">
+            {% for comment in comments %}
+                <div class="comment">{{ comment.content|safe }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

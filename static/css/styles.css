@@ -10,85 +10,83 @@ h2 {
 }
 
 p {
-    color: #130306;
+    color: #2d2d2d;
     font-size: 25px;
 }
 
-p.nav {
+p.margin_top {
     margin-right: 750px;
-    margin-top: 130px;
+    margin-top: 110px;
 }
 
-p.ex1 {
-    margin-right: 450px;
+p.ex1 {  /*tekst na stronie*/
+    margin-left: 28%;
     font-size: 16px;
-  }
+    text-align: left;
+}
 
-  p.top {
-    margin-top: 90px;
-  }
+p.subtitle {  
+    margin-left: 26%;
+    font-size: 25px;
+    text-align: left;
+}
 
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    /* margin-top: 50px; */
-    padding: 0;
     text-align: center;
 }
 
 .task-bar {
     background-color: #2d2d2d;
-    overflow: hidden;
     position: absolute; /* wzgledem innych (1) */
-    top: 10%;
-    left: 25.6%;
-    width: 50.4%;
-    text-align: center;
+    justify-content: space-between; 
+    top: 80px;
+    left: 19.5%;
+    width: 63%;
+    display: flex;
+    flex-wrap: wrap; /* Elementy się zawijają */
+    font-size: 16px;
 }
 
-.task-bar a {
-    float: left;
-    display: block;
+.task-bar a { /*tekst*/
     color: white;
-    text-align: center;
-    padding: 14px 16px;
+    padding: 21px 23px;
     text-decoration: none;
 }
 
-.task-bar a:hover {  /* podswietlenie kafelków*/
-    background-color: #ddd;
+.task-bar a:hover { 
+    background-color: #ebecf3ec;
     color: black;
 }
 
-.login-form .form-group {
+.login-form .form-group { /* gdzie hasło i login*/
     margin-bottom: 11px;
 }
 
- .login-form label {
-    /* display: block; */  
+.login-form label {
     margin-bottom: 3px;
     margin-right: 0.28%;
     color: #333;
 }
 
-.login-form input {
+.login-form input { /*todo*/
     width: 9%;
     margin-right: 80px;
-    padding: 9px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
     box-sizing: border-box;
 }
 
 .login-form .btn {
-    width: 5.5%;
+    width: 80px;
     padding: 9px;
     background-color: #1a86f9;
     border: 1px solid #ccc;
     border-radius: 6px;
     color: #fff;
     font-size: 16px;
-    cursor: pointer;  /* mozna poszalec */
+    cursor: pointer;
 }
 
 .login-form .btn:hover {
@@ -97,31 +95,32 @@ body {
 
 img {
     border: 3px solid #ddd;
-    max-width: 50%;
 }
 
 .main_image {
     max-width: 50%;
-    margin-left: 28px;
+    margin-left: 25px;
+    margin-top: 17px;
 }
 
 .home_photos {
     border: 3px solid #ddd;
-    max-width: 460px; 
+    max-width: 460px;
     cursor: pointer;
     margin-top: 30px;
-    margin-left: 25px; 
+    margin-left: 25px;
 }
 
 .container {
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
+    flex-direction: column;
+    align-items: center;
+    top: 130px;
 }
 
 .row {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
 }
 
 .caption {
@@ -133,4 +132,63 @@ img {
 
 .photo-container {
     text-align: center;
+}
+
+.task-bar .search-form {
+    display: flex;
+    padding: 4px;
+}
+
+.task-bar input[type="text"] {
+    margin-top: 7px;
+    margin-bottom: 4px;
+    font-size: 16px;
+}
+
+.task-bar .search-form button {
+    padding: 8px 12px;
+    margin-top: 7px;
+    margin-bottom: 4px;
+    background: #ebecf3ec;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.task-bar .search-form button:hover {
+    background: #e9e7e78a;
+}
+
+.search-results {
+    display: none;
+    position: absolute;
+    top: 100%; 
+    background-color: #ffffffdc; /* Tło podpowiedzi */
+    width: 100%; 
+    z-index: 1000;
+}
+
+.search-results a {
+    display: block; 
+    padding: 9px; 
+    text-decoration: none;
+    color: #2d2d2d; 
+}
+
+/* Responsywność */
+@media (max-width: 760px) {
+
+    .task-bar {
+        flex-direction: column; /* task-bar w kolumne */
+        position: static;
+        width: 100%;
+    }
+
+    .task-bar input[type="text"] {
+        width: 80%;
+    }
+
+    .task-bar .search-form {
+        width: 100%; /* Pełna szerokość na małych ekranach */
+        justify-content: center; 
+    }
 }

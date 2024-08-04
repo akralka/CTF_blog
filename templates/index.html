@@ -8,24 +8,30 @@
 </head>
 <body>
     <h1>Welcome to my Blog!</h1>
-    <p class="top"></p>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <p class="margin_top"></p>
     <div class="task-bar">
         <a href="{{ url_for('home') }}">Home</a>
         <a href="{{ url_for('about') }}">About Us</a>
         <a href="{{ url_for('login') }}">Log In</a>
         <a href="{{ url_for('sign_in') }}">Sign In</a>
+
+        <form class="search-form" onsubmit="searchRedirect(event)">
+            <input type="text" placeholder="Search.." name="search" id="search-input" oninput="showSuggestions()">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        <div id="search-results" class="search-results"></div> 
     </div>
+
     <div class="container">
-        <img class="main_image" src="{{ url_for('uploaded_file', filename='blog_girl.png') }}" alt="Reload to obtain a photo!">
-        
         <div class="row">
             <div class="photo-container">
-                <img class="home_photos" src="{{ url_for('uploaded_file', filename='blog_girl.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/1')">
-                <p class="caption" onclick="navigateTo('/1')">Header 1</p>
+                <img class="home_photos" src="{{ url_for('uploaded_file', filename='xss.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/1')">
+                <p class="caption" onclick="navigateTo('/1')">XSS - cross-site scripting</p>
             </div>
             <div class="photo-container">
-                <img class="home_photos" src="{{ url_for('uploaded_file', filename='blog_girl.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/2')">
-                <p class="caption" onclick="navigateTo('/2')">Header 2</p>
+                <img class="home_photos" src="{{ url_for('uploaded_file', filename='xxe.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/2')">
+                <p class="caption" onclick="navigateTo('/2')">XXE - XML external entity injection</p>
             </div>
         </div>
         
