@@ -24,69 +24,26 @@
     <h1>Blog!</h1> 
     <h2>What is cross-site scripting (XSS)?</h2>
     <img class="main_image" src="{{ url_for('uploaded_file', filename='xss_2.png') }}" alt="Reload to obtain a photo!">
-    <p class="podtytul">XSS</p> 
+    <p class="subtitle">XSS</p> 
     <p class="ex1">tekst</p>
-    <p class="podtytul">Stored XSS</p> 
+    <p class="subtitle">Stored XSS</p> 
     <p class="ex1">tekst</p>
-    <p class="podtytul">Reflected XSS</p> 
+    <p class="subtitle">Reflected XSS</p> 
     <p class="ex1">tekst</p>
-    <p class="podtytul">DOM-based XSS</p> 
+    <p class="subtitle">DOM-based XSS</p> 
     <p class="ex1">tekst</p>
-    <p class="podtytul">Share what you think about that article!    </p> 
-    <style>
-        .comment-section {
-            margin-top: 50px;
-        }
-        .comment-form {
-            display: flex;
-            flex-direction: column;
-            max-width: 500px;
-            margin-left: 27%;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .comment-form textarea {
-            padding: 10px;
-            font-size: 16px;
-            margin-bottom: 10px;
-            height: 100px;
-        }
-        .comment-form button {
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            background-color: #1a86f9;
-            color: #fff;
-            cursor: pointer;
-        }
-        .comment-form button:hover {
-            background-color: #024fa2;
-        } 
-        .comments {
-            max-width: 500px;
-            margin: 20px auto;
-            padding: 10px;
-            
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .comment {
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-        }
-    </style>
-
-    <div class="comment-section">
-        <form class="comment-form" action="/xss" method="POST">
-            <textarea name="content" placeholder="Write your comment here..."></textarea>
-            <button type="submit">Submit</button>
-        </form>
-        <div class="comments">
-            {% for comment in comments %}
-                <div class="comment">{{ comment.content|safe }}</div>
-            {% endfor %}
-        </div>
+    
+    <img class="main_image" src="{{ url_for('uploaded_file', filename='xss_2.png') }}" alt="Reload to obtain a photo!">
+    <p class="subtitle">Share what you think about that article!</p> 
+    <form class="comment-form" action="/xss" method="POST">
+        <textarea name="content" placeholder="Write your comment here..."></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <p class="subtitle">Comments!</p> 
+    <div class="comments">
+        {% for comment in comments %}
+            <div class="comment">{{ comment.content|safe }}</div>   <!-- safe -> nie wyswietla, ale działa-->
+        {% endfor %}
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

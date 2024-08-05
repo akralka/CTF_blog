@@ -35,7 +35,7 @@ def create_app():
                 db.session.commit()
                 return redirect(url_for('xss'))
 
-        comments = Comment.query.all()
+        comments = Comment.query.order_by(Comment.id.desc()).all()
         return render_template('xss.html', comments=comments)
 
 
