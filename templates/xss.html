@@ -35,15 +35,20 @@
     
     <img class="main_image" src="{{ url_for('uploaded_file', filename='xss_2.png') }}" alt="Reload to obtain a photo!">
     <p class="subtitle">Share what you think about that article!</p> 
+
     <form class="comment-form" action="/xss" method="POST">
+        <input type="text" placeholder="Write your name here..." id="name" name="name">
         <textarea name="content" placeholder="Write your comment here..."></textarea>
         <button type="submit">Submit</button>
     </form>
+    
     <p class="subtitle">Comments!</p> 
     <div class="comments">
         {% for comment in comments %}
-            <div class="comment">{{ comment.content|safe }}</div>   <!-- safe -> nie wyswietla, ale działa-->
-        {% endfor %}
+            <div class="comment"> <!-- safe -> nie wyswietla, ale działa-->
+                <strong>{{ comment.name }}</strong>: {{ comment.content|safe }}
+            </div>    
+            {% endfor %}
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

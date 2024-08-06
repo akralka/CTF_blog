@@ -26,12 +26,12 @@
     <div class="container">
         <div class="row">
             <div class="photo-container">
-                <img class="home_photos" src="{{ url_for('uploaded_file', filename='xss.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/1')">
-                <p class="caption" onclick="navigateTo('/1')">XSS - cross-site scripting</p>
+                <img class="home_photos" src="{{ url_for('uploaded_file', filename='xss.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/xss')">
+                <p class="caption" onclick="navigateTo('/xss')">XSS - cross-site scripting</p>
             </div>
             <div class="photo-container">
-                <img class="home_photos" src="{{ url_for('uploaded_file', filename='xxe.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/2')">
-                <p class="caption" onclick="navigateTo('/2')">XXE - XML external entity injection</p>
+                <img class="home_photos" src="{{ url_for('uploaded_file', filename='xxe.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/xxe')">
+                <p class="caption" onclick="navigateTo('/xxe')">XXE - XML external entity injection</p>
             </div>
         </div>
         

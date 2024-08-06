@@ -21,8 +21,22 @@ p.margin_top {
 
 p.ex1 {  /*tekst na stronie*/
     margin-left: 28%;
+    margin-right: 26%;
     font-size: 16px;
     text-align: left;
+}
+
+ul.b {
+    margin-left: 28%;
+    margin-right: 26%;
+    font-size: 16px;
+    text-align: left;
+    list-style-type: square;
+  }
+
+.centered-text {
+    text-align: center;
+    font-size: 20px;
 }
 
 p.subtitle {  
@@ -184,6 +198,13 @@ body {
     margin-bottom: 8px;
     height: 100px;
 }
+
+.comment-form input {
+    padding: 10px;
+    margin-bottom: 8px;
+    font-size: 14.5px;
+}
+
 .comment-form button {
     padding: 10px;
     font-size: 16px;

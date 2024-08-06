@@ -9,4 +9,5 @@ class User(db.Model):
 class Comment(db.Model):
     __tablename__ = "comments"
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
     content = db.Column(db.Text, nullable=False)

@@ -6,7 +6,7 @@ from sqlalchemy import text
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] =  "sqlite:///data.db" #db_url or os.getenv("DATABASE_URL", "sqlite:///data.db")  # potem bez os bo bedą widzieli
+    app.config['SQLALCHEMY_DATABASE_URI'] =  "sqlite:///data.db"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
     app.config['SECRET_KEY'] = 'aaa'
@@ -20,17 +20,14 @@ def create_app():
     @app.route('/')
     def home():
         return render_template('index.html')
-
-    @app.route('/1')
-    def header1():
-        return render_template('xss.html')
     
     @app.route('/xss', methods=['GET', 'POST'])
     def xss():
         if request.method == 'POST':
+            name = request.form['name']
             content = request.form['content']
-            if content:
-                new_comment = Comment(content=content)
+            if name and content:
+                new_comment = Comment(name=name, content=content)
                 db.session.add(new_comment)
                 db.session.commit()
                 return redirect(url_for('xss'))
@@ -38,9 +35,8 @@ def create_app():
         comments = Comment.query.order_by(Comment.id.desc()).all()
         return render_template('xss.html', comments=comments)
 
-
-    @app.route('/2')
-    def header2():
+    @app.route('/xxe')
+    def xxe():
         return render_template('xxe.html')
 
     @app.route('/<query>')
@@ -61,7 +57,8 @@ def create_app():
             password = request.form.get('password')
 
             # Podatne na SQL injection zapytanie do bazy danych
-            query = text("SELECT login FROM users WHERE login = ", username)
+            # query = text("SELECT login FROM users WHERE login = ", username)
+            query = text(f"SELECT login FROM users WHERE login = '{username}'")
             result = db.session.execute(query)
             user = result.fetchone()
 
