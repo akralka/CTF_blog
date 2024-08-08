@@ -25,7 +25,19 @@
     <h2>What is XML external entity (XXE) injection?</h2>
     <img class="main_image" src="{{ url_for('uploaded_file', filename='xxe_2.png') }}" alt="Reload to obtain a photo!">
     <p class="subtitle">XXE</p> 
-    <p class="ex1">tekst</p>
+    <p class="ex1">This is a security flaw that allows an attacker to inject malicious XML entities into a web application that processes XML data.
+        Attackers who successfully exploit XXE vulnerabilities can interact with systems that the application can access, 
+        view files on the server, and in some cases, perform remote code execution (RCE).
+        There are various types of XXE attacks:
+        <ul class="b">
+            <li>Exploiting XXE to retrieve files, where an external entity is defined containing the contents of a file, and returned in the application's response.</li>
+            <li>Exploiting XXE to perform SSRF attacks, where an external entity is defined based on a URL to a back-end system.</li>
+            <li>Exploiting blind XXE exfiltrate data out-of-band, where sensitive data is transmitted from the application server to a system that the attacker controls.</li>
+            <li>Exploiting blind XXE to retrieve data via error messages, where the attacker can trigger a parsing error message containing sensitive data.</li></p>
+        </ul>        
+        <p class="ex1">Continue reading on: 
+        <strong><a href="https://portswigger.net/web-security/xxe#what-is-xml-external-entity-injection">Web Security Academy - XXE</a></strong>
+        </p>
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

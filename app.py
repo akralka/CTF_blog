@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
 from models import db, User, Comment 
 from sqlalchemy import text
+import hashlib
 
 
 def create_app():
@@ -56,22 +57,24 @@ def create_app():
             username = request.form.get('username')
             password = request.form.get('password')
 
-            # Podatne na SQL injection zapytanie do bazy danych
-            # query = text("SELECT login FROM users WHERE login = ", username)
             query = text(f"SELECT login FROM users WHERE login = '{username}'")
             result = db.session.execute(query)
             user = result.fetchone()
 
+            hashed_password = hashlib.md5(password.encode()).hexdigest()
+
             if user:
                 user = User.query.filter_by(login=username).first()
-                if user and user.password == password:
+                if user.login == "admin" and user.password == hashed_password:
                     return redirect(url_for('admin_account'))
+                if user and user.password == hashed_password:
+                    return render_template('index.html')
                 else:
                     flash('Invalid password')
             else:
                 flash('Invalid username')
 
-            return redirect(url_for('home'))
+            return redirect(url_for('login'))
         else:
             return render_template('login.html')
 
@@ -87,12 +90,13 @@ def create_app():
                 return redirect(url_for('sign_in'))
 
             # Dodanie użytkownika do bazy danych
-            new_user = User(login=username, password=password)
+            hashed_password = hashlib.md5(password.encode()).hexdigest()
+            new_user = User(login=username, password=hashed_password)
             db.session.add(new_user)
             db.session.commit()
 
             flash('User added successfully')
-            return redirect(url_for('home'))
+            return redirect(url_for('sign_in'))
         else:
             return render_template('sign_in.html')
     

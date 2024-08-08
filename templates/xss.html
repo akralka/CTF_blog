@@ -25,15 +25,33 @@
     <h2>What is cross-site scripting (XSS)?</h2>
     <img class="main_image" src="{{ url_for('uploaded_file', filename='xss_2.png') }}" alt="Reload to obtain a photo!">
     <p class="subtitle">XSS</p> 
-    <p class="ex1">tekst</p>
+    <p class="ex1"> Cross-site scripting vulnerabilities normally allow an attacker to masquerade as a victim user, to carry out any actions that the user is able to perform, 
+        and to access any of the user's data. The malicious content sent to the web browser often takes the form of a segment of JavaScript,
+        but may also include HTML, Flash, or any other type of code that the browser may execute. 
+        Cross-Site Scripting (XSS) attacks occur when:
+        <ul class="b">
+           <li> Data enters a Web application through an untrusted source, most frequently a web request.</li>
+           <li> The data is included in dynamic content that is sent to a web user without being validated for malicious content.</li>
+        </ul></p>
     <p class="subtitle">Stored XSS</p> 
-    <p class="ex1">tekst</p>
+    <p class="ex1">This attack occurs when an application or website has malware that has attacked all of its HTTP response codes. 
+        It is also sometimes referred to as <strong>Persistent XSS</strong>. This code can be placed in places such as login forms or comment sections. The danger of 
+        this attack is that it does not require any response from the user. All the attacker has to do is drop the bait and wait for the results. </p>
     <p class="subtitle">Reflected XSS</p> 
-    <p class="ex1">tekst</p>
-    <p class="subtitle">DOM-based XSS</p> 
-    <p class="ex1">tekst</p>
+    <p class="ex1">Reflected attacks are those where the injected script is reflected off the web server, such as in an error message, search result, 
+        or any other response that includes some or all of the input sent to the server as part of the request.
+        If the user visits the URL constructed by the attacker, then the attacker's script executes in the user's browser, in the context of that user's session with the application.</p>
+        <p class="centered-text">
+            e.g. https://my.domain?id=&lt;script&gt;/*+Bad+stuff+here...+*/&lt;/script&gt;
+    </p></p>
+        <p class="subtitle">DOM-based XSS</p> 
+    <p class="ex1">DOM Based XSS attack is executed as a result of modifying the DOM “environment” 
+        in the victim’s browser used by the original client side script, so that the client side code
+         runs in an “unexpected” manner. That is, the page itself (the HTTP response that is) does 
+         not change, but the client side code contained in the page executes
+         differently due to the malicious modifications that have occurred in the DOM environment.</p>
     
-    <img class="main_image" src="{{ url_for('uploaded_file', filename='xss_2.png') }}" alt="Reload to obtain a photo!">
+    <img class="main_image" src="{{ url_for('uploaded_file', filename='hacker_xss.png') }}" alt="Reload to obtain a photo!">
     <p class="subtitle">Share what you think about that article!</p> 
 
     <form class="comment-form" action="/xss" method="POST">
