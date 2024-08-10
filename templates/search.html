@@ -4,9 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Result</title>
+    <style>
+        .comment-box {
+            border: 3px solid #030000;
+            padding: 20px;
+            margin-top: 50px;
+            background-color: #e8dfeae6;
+            border-radius: 8px;
+            max-width: 700px;
+        }
+        .comment-header {
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+            color: #2d2d2d;
+            margin-bottom: 6px;
+        }
+        .comment-body {
+            font-size: 18px;
+            color: #2d2d2d;
+            margin-bottom: 10px;
+        }
+        .comment-author {
+            text-align: center;
+            font-style: italic;
+            color: #777;
+        }
+    </style>
 </head>
 <body>
-    <h1>Search Result for {{ query }}</h1>
-    <p>This is the page for search query: {{ query }}</p>
+    <h1>Article {{ query }}</h1>
+    <h2>A few things worth checking out!</h2>
+
+    <div class="comment-box">
+        <div class="comment-body">
+            {% if query == '1' %}
+                <div class="comment-header">Password Hashing</div>
+                <p> "Password hashing is defined as putting a password through a hashing algorithm (bcrypt, Argon2, etc) (note that algorithms such as md5 are considered deprecated) 
+                    to turn plaintext into an unintelligible series of numbers and letters. 
+                    This is important for basic security hygiene because,
+                    in the event of a security breach, any compromised passwords are unintelligible to the bad actor. As a result, the theft of this information is considerably more difficult."
+                </p>
+                <p>"Salting is the act of adding a series of random characters to a password before going through the hashing function."
+                    Read more: <strong><a href="https://www.okta.com/blog/2019/03/what-are-salted-passwords-and-password-hashing/">Password Hashing</a></strong>
+                </p> 
+                <p>You should already know that the hash should NOT look like this: ZmxhZz17N2F6eV9mbGFnfQ==. So what could this string be?</p>
+            {% elif query == '2' %}
+                <div class="comment-header">JWT Tokens</div>
+                <p>"JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object."</p>
+                <p>"In its compact form, JSON Web Tokens consist of three parts separated by dots (.), which are:
+                    <ul class="b">
+                        <li>Header - The header typically consists of two parts: the type of the token, which is JWT, and the signing algorithm being used, such as HMAC SHA256 or RSA.</li>
+                        <li>Payload - The second part of the token is the payload, which contains the claims. Claims are statements about an entity (typically, the user) and additional data. </li>
+                        <li>Signature - The signature is used to verify the message wasn't changed along the way, and, in the case of tokens signed with a private key, it can also verify that the sender of the JWT is who it says it is."</li>
+                      </ul>
+                </p>
+                <p>
+                <strong>JWT example: </strong>eyJ0eXAiOiJKV1QifQ.eyJmbGFnIjoiSldUX1Rva2VuNSJ9.e30
+                </p>
+                <p>
+                    Read more: <strong><a href="https://jwt.io/introduction">JWT</a></strong>
+                </p> 
+            {% elif query == '3' %}
+                <div class="comment-header">IDK</div>
+                <p>On page 3, we explore...</p>
+            {% elif query == '4' %}
+                {% if session.get('is_admin') %}
+                    <div class="comment-header">Admin-Only  - todo</div>
+                    <p>Only administrators can see this section...</p>
+                {% else %}
+                    <p>You do not have the necessary permissions to view this content.</p>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="comment-author">
+            Posted by: Kolorowe_kotki_123
+        </div>
+    </div>
 </body>
 </html>

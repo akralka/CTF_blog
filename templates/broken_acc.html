@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In</title>
+    <title>XSS</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
@@ -22,31 +22,19 @@
     </div>
 
     <h1>Blog!</h1> 
-    <h2>Login</h2>
-        {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-          {% for message in messages %}
-            {{ message }}
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-        <form action="{{ url_for('login') }}" method="post" class="login-form">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn">Login</button>
-        </form>
+    <h2>What is Broken Access Control?</h2>
+    <img class="main_image" src="{{ url_for('uploaded_file', filename='blog_girl.png') }}" alt="Reload to obtain a photo!">
+    <p class="subtitle">Broken Access Control</p> 
+    <p class="ex1">test</p>
     </div>
 
-    {% if 'username' in session %}
-    <p class="centered-text">You are logged in as: {{ session['username'] }}! <a href="{{ url_for('logout') }}">Logout</a></p>
+    <p class="ex1">Below you will find additional articles. Available only to logged in users.</p>
+    <p class="caption" onclick="navigateTo('/1')">Article 1!</p>
+    <p class="caption" onclick="navigateTo('/2')">Article 2!</p>
+    <p class="caption" onclick="navigateTo('/3')">Article 3!</p>
+
+    {% if session.get('is_admin') %}
+        <p class="caption" onclick="navigateTo('/4')">Admin only!</p>
     {% endif %}
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

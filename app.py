@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory, session
 from models import db, User, Comment 
 from sqlalchemy import text
 import hashlib
@@ -40,10 +40,25 @@ def create_app():
     def xxe():
         return render_template('xxe.html')
 
+    @app.route('/broken_acc')
+    def broken_acc():
+        if 'username' in session:
+            return render_template('broken_acc.html')
+        else:
+            flash('You must be logged in to view this page.')
+            return redirect(url_for('login'))
+
+
     @app.route('/<query>')
     def search_result(query):
         if query in ['1', '2', '3', '4']:
-            return render_template('search.html', query=query)
+            if 'username' in session:
+                return render_template('search.html', query=query)
+            else:
+                flash('You must be logged in to view this page.')
+                return redirect(url_for('login'))
+        if query in ['31']:
+            return "Oh no! There are a few endpoints left that should no longer be accessible. Good job! Here's your flag: flag={k1nda_sus}"
         else:
             return "Page not found", 404
     
@@ -57,18 +72,23 @@ def create_app():
             username = request.form.get('username')
             password = request.form.get('password')
 
-            query = text(f"SELECT login FROM users WHERE login = '{username}'")
-            result = db.session.execute(query)
-            user = result.fetchone()
+            # query = text(f"SELECT login FROM users WHERE login = '{username}'")
+            # result = db.session.execute(query)
+            # user = result.fetchone()
+            user = User.query.filter_by(login=username).first()
 
             hashed_password = hashlib.md5(password.encode()).hexdigest()
 
             if user:
-                user = User.query.filter_by(login=username).first()
-                if user.login == "admin" and user.password == hashed_password:
-                    return redirect(url_for('admin_account'))
                 if user and user.password == hashed_password:
-                    return render_template('index.html')
+                    session['username'] = username 
+                    session['is_admin'] = user.is_admin 
+
+                    if user.login == "admin":
+                        return redirect(url_for('admin_account'))
+                    
+                    return redirect(url_for('broken_acc'))
+                
                 else:
                     flash('Invalid password')
             else:
@@ -77,6 +97,13 @@ def create_app():
             return redirect(url_for('login'))
         else:
             return render_template('login.html')
+
+    @app.route('/logout')
+    def logout():
+        session.pop('username', None)
+        flash('You have been logged out.')
+        return redirect(url_for('login'))
+
 
     @app.route('/sign_in', methods=['GET', 'POST'])
     def sign_in():
