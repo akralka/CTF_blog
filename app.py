@@ -1,8 +1,9 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory, session
-from models import db, User, Comment 
+from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, send_from_directory, session
+from models import db, User, Comment, Article
 from sqlalchemy import text
 import hashlib
+import json
 
 
 def create_app():
@@ -11,6 +12,9 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
     app.config['SECRET_KEY'] = 'aaa'
+    # SESSION_COOKIE_HTTPONLY=True,
+    # REMEMBER_COOKIE_HTTPONLY=True,
+    # SESSION_COOKIE_SAMESITE="Strict",
 
     # Inicjalizacja bazy danych
     db.init_app(app)
@@ -21,6 +25,50 @@ def create_app():
     @app.route('/')
     def home():
         return render_template('index.html')
+    
+    
+    @app.route('/sqli')
+    def sqli():
+        return render_template('sqli.html')
+
+    @app.route('/search_suggestions', methods=['GET'])
+    def search_suggestions():
+        query = request.args.get('query', '')
+
+        if query:
+            try:
+                # SQL Injection vulnerable query
+                sql_query = text(f"SELECT id, title, url FROM articles WHERE title LIKE '%{query}%'")
+                results = db.session.execute(sql_query)
+                articles = [{'id': row.id, 'title': row.title, 'url': row.url} for row in results]
+
+                if articles:
+                    return jsonify(articles)
+                else:
+                    return jsonify({'message': 'There is no such article!'})
+                
+            except Exception as e:
+                app.logger.error(f"Error executing query: {e}")
+                return jsonify({'error': 'An error occurred while fetching suggestions.'}), 500
+
+        return jsonify([])
+
+    @app.route('/broken_acc', methods=['GET'])
+    def broken_acc():
+        if 'username' not in session:
+            flash('You must be logged in to view this page.')
+            return redirect(url_for('login'))
+
+        # Pobieramy 'search' z URL
+        query = request.args.get('search')
+
+        if query in ['1', '2', '3', '4']:
+            return render_template('search.html', query=query)
+        elif query == '31':
+            return "Oh no! There are a few endpoints left that should no longer be accessible. Good job! Here's your flag: flag={k1nda_sus}"
+        else:
+            return render_template('broken_acc.html')  # Inaczej wróć - todo
+
     
     @app.route('/xss', methods=['GET', 'POST'])
     def xss():
@@ -39,28 +87,6 @@ def create_app():
     @app.route('/xxe')
     def xxe():
         return render_template('xxe.html')
-
-    @app.route('/broken_acc')
-    def broken_acc():
-        if 'username' in session:
-            return render_template('broken_acc.html')
-        else:
-            flash('You must be logged in to view this page.')
-            return redirect(url_for('login'))
-
-
-    @app.route('/<query>')
-    def search_result(query):
-        if query in ['1', '2', '3', '4']:
-            if 'username' in session:
-                return render_template('search.html', query=query)
-            else:
-                flash('You must be logged in to view this page.')
-                return redirect(url_for('login'))
-        if query in ['31']:
-            return "Oh no! There are a few endpoints left that should no longer be accessible. Good job! Here's your flag: flag={k1nda_sus}"
-        else:
-            return "Page not found", 404
     
     @app.route('/about')
     def about():
@@ -72,7 +98,7 @@ def create_app():
             username = request.form.get('username')
             password = request.form.get('password')
 
-            # query = text(f"SELECT login FROM users WHERE login = '{username}'")
+            query = text(f"SELECT login FROM users WHERE login = '{username}'")
             # result = db.session.execute(query)
             # user = result.fetchone()
             user = User.query.filter_by(login=username).first()
@@ -80,7 +106,7 @@ def create_app():
             hashed_password = hashlib.md5(password.encode()).hexdigest()
 
             if user:
-                if user and user.password == hashed_password:
+                if user and user.password == hashed_password:   
                     session['username'] = username 
                     session['is_admin'] = user.is_admin 
 

@@ -14,11 +14,6 @@
         <a href="{{ url_for('about') }}">About Us</a>
         <a href="{{ url_for('login') }}">Login</a>
         <a href="{{ url_for('sign_in') }}">Sign In</a>
-        <form class="search-form" onsubmit="searchRedirect(event)">
-            <input type="text" placeholder="Search.." name="search" id="search-input" oninput="showSuggestions()">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
-        <div id="search-results" class="search-results"></div> 
     </div>
 
     <h1>Blog!</h1> 
@@ -29,13 +24,13 @@
     </div>
 
     <p class="ex1">Below you will find additional articles. Available only to logged in users.</p>
-    <p class="caption" onclick="navigateTo('/1')">Article 1!</p>
-    <p class="caption" onclick="navigateTo('/2')">Article 2!</p>
-    <p class="caption" onclick="navigateTo('/3')">Article 3!</p>
-
+    <p class="caption" onclick="window.location.href='/broken_acc?search=1'">Article 1!</p>
+    <p class="caption" onclick="window.location.href='/broken_acc?search=2'">Article 2!</p>
+    <p class="caption" onclick="window.location.href='/broken_acc?search=3'">Article 3!</p>
     {% if session.get('is_admin') %}
-        <p class="caption" onclick="navigateTo('/4')">Admin only!</p>
+        <p class="caption" onclick="window.location.href='/broken_acc?search=4'">Admin only!</p>
     {% endif %}
+    
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

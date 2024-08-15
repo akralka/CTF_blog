@@ -73,18 +73,18 @@ body {
     color: black;
 }
 /*Search*/
-.task-bar .search-form {
+.search-form {
     display: flex;
     padding: 4px;
 }
 
-.task-bar input[type="text"] {
+.search-form input[type="text"] {
     margin-top: 7px;
     margin-bottom: 4px;
     font-size: 16px;
 }
 
-.task-bar .search-form button {
+.search-form button {
     padding: 8px 12px;
     margin-top: 7px;
     margin-bottom: 4px;
@@ -93,7 +93,7 @@ body {
     cursor: pointer;
 }
 
-.task-bar .search-form button:hover {
+.search-form button:hover {
     background: #e9e7e78a;
 }
 

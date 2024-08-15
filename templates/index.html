@@ -15,12 +15,6 @@
         <a href="{{ url_for('about') }}">About Us</a>
         <a href="{{ url_for('login') }}">Log In</a>
         <a href="{{ url_for('sign_in') }}">Sign In</a>
-
-        <form class="search-form" onsubmit="searchRedirect(event)">
-            <input type="text" placeholder="Search.." name="search" id="search-input" oninput="showSuggestions()">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
-        <div id="search-results" class="search-results"></div> 
     </div>
 
     <div class="container">
@@ -41,8 +35,8 @@
                 <p class="caption" onclick="navigateTo('/broken_acc')">Broken Access Control</p>
             </div>
             <div class="photo-container">
-                <img class="home_photos" src="{{ url_for('uploaded_file', filename='acc_rest.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/4')">
-                <p class="caption" onclick="navigateTo('/4')">Admin only!</p>
+                <img class="home_photos" src="{{ url_for('uploaded_file', filename='sqli.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/sqli')">
+                <p class="caption" onclick="navigateTo('/sqli')">SQL Injection</p>
             </div>
         </div>
         
