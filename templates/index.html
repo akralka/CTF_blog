@@ -20,22 +20,22 @@
     <div class="container">
         <div class="row">
             <div class="photo-container">
-                <img class="home_photos" src="{{ url_for('uploaded_file', filename='xss.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/xss')">
+                <img class="home_photos" src="{{ url_for('photo_display', filename='xss.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/xss')">
                 <p class="caption" onclick="navigateTo('/xss')">XSS - cross-site scripting</p>
             </div>
             <div class="photo-container">
-                <img class="home_photos" src="{{ url_for('uploaded_file', filename='xxe.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/xxe')">
+                <img class="home_photos" src="{{ url_for('photo_display', filename='xxe.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/xxe')">
                 <p class="caption" onclick="navigateTo('/xxe')">XXE - XML external entity injection</p>
             </div>
         </div>
         
         <div class="row">
             <div class="photo-container">
-                <img class="home_photos" src="{{ url_for('uploaded_file', filename='blog_girl.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/broken_acc')">
+                <img class="home_photos" src="{{ url_for('photo_display', filename='blog_girl.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/broken_acc')">
                 <p class="caption" onclick="navigateTo('/broken_acc')">Broken Access Control</p>
             </div>
             <div class="photo-container">
-                <img class="home_photos" src="{{ url_for('uploaded_file', filename='sqli.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/sqli')">
+                <img class="home_photos" src="{{ url_for('photo_display', filename='sqli.png') }}" alt="Reload to obtain a photo!" onclick="navigateTo('/sqli')">
                 <p class="caption" onclick="navigateTo('/sqli')">SQL Injection</p>
             </div>
         </div>

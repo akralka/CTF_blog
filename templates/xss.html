@@ -18,7 +18,7 @@
 
     <h1>Blog!</h1> 
     <h2>What is cross-site scripting (XSS)?</h2>
-    <img class="main_image" src="{{ url_for('uploaded_file', filename='xss_2.png') }}" alt="Reload to obtain a photo!">
+    <img class="main_image" src="{{ url_for('photo_display', filename='xss_2.png') }}" alt="Reload to obtain a photo!">
     <p class="subtitle">XSS</p> 
     <p class="ex1"> Cross-site scripting vulnerabilities normally allow an attacker to masquerade as a victim user, to carry out any actions that the user is able to perform, 
         and to access any of the user's data. The malicious content sent to the web browser often takes the form of a segment of JavaScript,
@@ -46,7 +46,7 @@
          not change, but the client side code contained in the page executes
          differently due to the malicious modifications that have occurred in the DOM environment.</p>
     
-    <img class="main_image" src="{{ url_for('uploaded_file', filename='hacker_xss.png') }}" alt="Reload to obtain a photo!">
+    <img class="main_image" src="{{ url_for('photo_display', filename='hacker_xss.png') }}" alt="Reload to obtain a photo!">
     <p class="subtitle">Share what you think about that article!</p> 
 
     <form class="comment-form" action="/xss" method="POST">

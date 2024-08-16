@@ -88,13 +88,31 @@
                 </p>
                 <p>
                     Read more: <strong><a href="https://www.spiceworks.com/it-security/vulnerability-management/articles/insecure-direct-object-reference-idor/">IDOR</a></strong>,
-                    <strong><a href="https://portswigger.net/web-security/access-control/idor">Web Security Academy - IDOR</a></strong>
+                    <strong><a href="https://portswigger.net/web-security/access-control/idor">Web Security Academy - IDOR</a></strong><br>
 
                 </p> 
             {% elif query == '4' %}
                 {% if session.get('is_admin') %}
-                    <div class="comment-header">Admin-Only  - todo</div>
-                    <p>Only administrators can see this section...</p>
+                    <div class="comment-header">Admin Only! -  File upload vulnerabilities</div>
+                    <p>"File upload vulnerabilities are when a web server allows users to upload files to its filesystem without sufficiently validating things like their name,
+                         type, contents, or size. Failing to properly enforce restrictions on these could mean that even a basic image upload function can be used to upload arbitrary
+                         and potentially dangerous files instead. This could even include server-side script files that enable remote code execution.<br><br>
+                        
+                         From a security perspective, the worst possible scenario is when a website allows you to upload server-side scripts, such as PHP, Java, or Python files,
+                          and is also configured to execute them as code. This makes it trivial to create your own web shell on the server."</p>
+                          Read more: <strong><a href="https://portswigger.net/web-security/file-upload">Web Security Academy - file-upload</a></strong><br><br>
+
+                    <!-- Formularz przesyłania plików -->
+                    <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+                        <label for="file">Upload a .png file:</label>
+                        <input type="file" id="file" name="file" accept=".png" required>
+                        <button type="submit">Upload</button>
+                    </form>
+
+                    {% if upload_message %}
+                        <p>{{ upload_message }}</p>
+                    {% endif %}
+                    
                 {% else %}
                     <p>You do not have the necessary permissions to view this content.</p>
                 {% endif %}

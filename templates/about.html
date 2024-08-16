@@ -36,14 +36,14 @@
         Your task is divided into two parts.
         </p>
     </p>
-    <img class="main_image" src="{{ url_for('uploaded_file', filename='blog_girl.png') }}" alt="Reload to obtain a photo!">
+    <img class="main_image" src="{{ url_for('photo_display', filename='blog_girl.png') }}" alt="Reload to obtain a photo!">
     <p class="subtitle">Part I</p>
     <p class="ex1">As described above, the application is vulnerable to many different types of attacks. 
         I recommend that you familiarize yourself with the vulnerabilities described on this blog, but also look into other available sources. 
         (My recommendation would be <strong><a href="https://portswigger.net/web-security">Web Security Academy</a></strong>). 
         Then try to find these vulnerabilities and expose them.</p>
 
-    <img class="main_image" src="{{ url_for('uploaded_file', filename='vuln.png') }}" alt="Reload to obtain a photo!">
+    <img class="main_image" src="{{ url_for('photo_display', filename='vuln.png') }}" alt="Reload to obtain a photo!">
     <p class="subtitle">Part II</p>
     <p class="ex1">An additional feature on the blog are hidden flags based on the CTF (Capture-The-Flag) principle. 
         In some places, finding a vulnerability will result in finding a flag (according to the pattern: <strong>flag={string}</strong>).
