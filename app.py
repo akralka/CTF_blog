@@ -3,8 +3,6 @@ from flask import Flask, render_template, request, jsonify, redirect, url_for, f
 from models import db, User, Comment, Article
 from sqlalchemy import text
 import hashlib
-import json
-
 
 def create_app():
     app = Flask(__name__)
@@ -22,6 +20,7 @@ def create_app():
     with app.app_context():
         db.create_all()
 
+
     @app.route('/')
     def home():
         return render_template('index.html')
@@ -31,13 +30,13 @@ def create_app():
     def sqli():
         return render_template('sqli.html')
 
+
     @app.route('/search_suggestions', methods=['GET'])
     def search_suggestions():
         query = request.args.get('query', '')
 
         if query:
             try:
-                # SQL Injection vulnerable query
                 sql_query = text(f"SELECT id, title, url FROM articles WHERE title LIKE '%{query}%'")
                 results = db.session.execute(sql_query)
                 articles = [{'id': row.id, 'title': row.title, 'url': row.url} for row in results]
@@ -53,6 +52,7 @@ def create_app():
 
         return jsonify([])
 
+
     @app.route('/broken_acc', methods=['GET'])
     def broken_acc():
         if 'username' not in session:
@@ -67,7 +67,7 @@ def create_app():
         elif query == '31':
             return "Oh no! There are a few endpoints left that should no longer be accessible. Good job! Here's your flag: flag={k1nda_sus}"
         else:
-            return render_template('broken_acc.html')  # Inaczej wróć - todo
+            return render_template('broken_acc.html')  
 
     
     @app.route('/xss', methods=['GET', 'POST'])
@@ -84,13 +84,16 @@ def create_app():
         comments = Comment.query.order_by(Comment.id.desc()).all()
         return render_template('xss.html', comments=comments)
 
+
     @app.route('/xxe')
     def xxe():
         return render_template('xxe.html')
     
+
     @app.route('/about')
     def about():
         return render_template('about.html')
+
 
     @app.route('/login', methods=['GET', 'POST'])
     def login():
@@ -98,31 +101,34 @@ def create_app():
             username = request.form.get('username')
             password = request.form.get('password')
 
-            query = text(f"SELECT login FROM users WHERE login = '{username}'")
-            # result = db.session.execute(query)
-            # user = result.fetchone()
             user = User.query.filter_by(login=username).first()
-
             hashed_password = hashlib.md5(password.encode()).hexdigest()
 
-            if user:
-                if user and user.password == hashed_password:   
-                    session['username'] = username 
-                    session['is_admin'] = user.is_admin 
-
-                    if user.login == "admin":
-                        return redirect(url_for('admin_account'))
-                    
-                    return redirect(url_for('broken_acc'))
-                
-                else:
-                    flash('Invalid password')
+            if user and user.password == hashed_password:
+                session['username'] = username
+                session['is_admin'] = user.is_admin
+                return redirect(url_for('login', user=username))
+            
             else:
-                flash('Invalid username')
+                flash('Invalid username or password')
+                return redirect(url_for('login'))
 
-            return redirect(url_for('login'))
-        else:
-            return render_template('login.html')
+        user_param = request.args.get('user')
+        user_param_lower = user_param.lower() if user_param else None
+
+        if 'username' in session:
+            if session.get('is_admin'):
+                if user_param == 'admin':
+                    return render_template('login.html', admin_message="Oh no! Admin forget to change his password!\n Here's your flag: flag={g0t_ya}")
+            
+            if user_param_lower == 'administrator':
+                users = User.query.all()
+                return render_template('login.html', users=users, user=session.get('username'))
+            else:
+                return render_template('login.html', user=session.get('username'))
+
+        return render_template('login.html')
+
 
     @app.route('/logout')
     def logout():
@@ -153,12 +159,9 @@ def create_app():
         else:
             return render_template('sign_in.html')
     
+
     @app.route('/uploads/<filename>')
     def uploaded_file(filename):
         return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-    
-    @app.route('/admin_account')
-    def admin_account():
-        return "Oh no! Admin forget to change his password!\n Here's your flag: flag={g0t_ya}"
         
     return app

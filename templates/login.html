@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <body>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <div class="task-bar">
         <a href="{{ url_for('home') }}">Home</a>
         <a href="{{ url_for('about') }}">About Us</a>
@@ -18,31 +16,52 @@
 
     <h1>Blog!</h1> 
     <h2>Login</h2>
-        {% with messages = get_flashed_messages() %}
+
+    {% with messages = get_flashed_messages() %}
       {% if messages %}
         <ul>
           {% for message in messages %}
-            {{ message }}
+            <li>{{ message }}</li>
           {% endfor %}
         </ul>
       {% endif %}
     {% endwith %}
-        <form action="{{ url_for('login') }}" method="post" class="login-form">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn">Login</button>
-        </form>
-    </div>
+
+    <form action="{{ url_for('login') }}" method="post" class="login-form">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn">Login</button>
+    </form>
 
     {% if 'username' in session %}
-    <p class="centered-text">You are logged in as: {{ session['username'] }}! <a href="{{ url_for('logout') }}">Logout</a></p>
+      <p class="centered-text">Hello: {{ session['username'] }}! <a href="{{ url_for('logout') }}">Logout</a></p>
+
+      {% set user_param = request.args.get('user', '').lower() %}
+      {% if user_param in ['administrator'] %}
+        <h3>Administrator Panel:</h3>
+        <h4>All users:</h4>
+
+          {% for user in users %}
+              {{ user.login }}
+          {% endfor %}
+
+      {% elif request.args.get('user') %}
+          <p>Logged in as: {{ request.args.get('user') }}. More information available only to administrators.</p>
+      {% endif %}
     {% endif %}
+
+    {% if admin_message %}
+      <div class="admin-message">
+          <p>{{ admin_message }}</p>
+      </div>
+    {% endif %}
+    
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
