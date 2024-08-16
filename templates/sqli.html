@@ -21,8 +21,28 @@
     </div>
     
     <h1>Blog!</h1>
-    <h2>What is Broken Access Control?</h2>
+    <h2>What is SQL Injection?</h2>
     <img class="main_image" src="{{ url_for('uploaded_file', filename='sqli_2.png') }}" alt="Reload to obtain a photo!">
+    <p class="subtitle">SQLi</p> 
+    <p class="ex1">  SQL injection (SQLi) is a web security vulnerability that allows an attacker to interfere with the queries that an application makes to its database. 
+        This can allow an attacker to view data that they are not normally able to retrieve. This might include data that belongs to other users, or any other data that the application can access.
+        In many cases, an attacker can modify or delete this data, causing persistent changes to the application's content or behavior. To detect SQL injection you would typically submit:
+        <ul class="b">
+           <li> The single (') or double (") quote character and look for errors/anomalies</li>
+           <li> Boolean conditions (e.g. OR "1"="1)</li>
+           <li>Payloads designed to trigger time delays. </li>
+        </ul></p>
+        <p class="ex1">
+            Places that can be considered for this vulnerability include not only all kinds of forms but also urls.
+            What I want you to keep in mind is to remember to encode special characters, because the URL does not allow direct use of some of them, such as ', ", --. 
+            They should be encoded e.g.: `%2D%2D` for `--`, `+` or `%20` for spaces. Here is an example of how it can be used:
+        <p class="centered-text">
+            e.g. https://my.domain/home?id=72'+OR+1=1--
+        </p></p>
+
+    <p class="ex1">Continue reading on: 
+        <strong><a href="https://portswigger.net/web-security/sql-injection">Web Security Academy - SQLi</a></strong>
+        </p>
     
     <div id="search-res-sqli" class="search-res-sqli"></div>
     

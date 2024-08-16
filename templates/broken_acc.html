@@ -19,16 +19,41 @@
     <h1>Blog!</h1> 
     <h2>What is Broken Access Control?</h2>
     <img class="main_image" src="{{ url_for('uploaded_file', filename='blog_girl.png') }}" alt="Reload to obtain a photo!">
-    <p class="subtitle">Broken Access Control</p> 
-    <p class="ex1">test</p>
-    </div>
+    <p class="subtitle">Access Control</p> 
+    <p class="ex1">"Access control determines whether the user is allowed to carry out the action that they are attempting to perform.
+        <ul class="b">
+            <li>Vertical access controls</li>
+            <br>
+            With vertical access controls, different types of users have access to different application functions. For example, an administrator might be able to modify or delete any user's account, 
+            while an ordinary user has no access to these actions.
+            Vertical access controls can be more fine-grained implementations of security models designed to enforce business policies such as separation of duties and least privilege.<br><br>
+            <li>Horizontal access controls</li>
+            <br>
+            With horizontal access controls, different users have access to a subset of resources of the same type.
+            For example, a banking application will allow a user to view transactions and make payments from their own accounts, but not the accounts of any other user."
+    </p></ul>
+    <p class="ex1">
+        Examples of broken access controls may be:
+        <ul class="b">
+            <li>A website might host sensitive functionality at URLs (e.g. https://my.domain/admin). Even though a regular user won't find this endpoint on a web page,
+                if they try to enter it directly in the URL, the page will be loaded with all its contents </li><br><br>
+            <li>The application makes access control decisions based on the submitted value. (e.g. https://my.domain/login?admin=true) </li><br><br>
+            <li>A user might access their own account page using the following URL: https://my.domain/myaccount?id=123. 
+                Seeing this, the user may think that since his id is 123, he may be able to access another user's account by entering id=122.   </li>
+        </ul>
+    </p>
 
-    <p class="ex1">Below you will find additional articles. Available only to logged in users.</p>
-    <p class="caption" onclick="window.location.href='/broken_acc?search=1'">Article 1!</p>
-    <p class="caption" onclick="window.location.href='/broken_acc?search=2'">Article 2!</p>
-    <p class="caption" onclick="window.location.href='/broken_acc?search=3'">Article 3!</p>
+
+    <p class="ex1">Continue reading on: 
+        <strong><a href="https://portswigger.net/web-security/access-control">Web Security Academy - Access Control</a></strong>
+    </p>
+
+    <p class="ex1"><strong>Below you will find additional articles. Available only to logged in users.</strong></p>
+    <p class="caption" onclick="navigateTo('/broken_acc?search=1')">Article 1!</p>
+    <p class="caption" onclick="navigateTo('/broken_acc?search=2')">Article 2!</p>
+    <p class="caption" onclick="navigateTo('/broken_acc?search=3')">Article 3!</p>
     {% if session.get('is_admin') %}
-        <p class="caption" onclick="window.location.href='/broken_acc?search=4'">Admin only!</p>
+        <p class="caption" onclick="navigateTo('/broken_acc?search=4')">Admin only!</p>
     {% endif %}
     
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>

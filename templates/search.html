@@ -66,8 +66,31 @@
                     Read more: <strong><a href="https://jwt.io/introduction">JWT</a></strong>
                 </p> 
             {% elif query == '3' %}
-                <div class="comment-header">IDK</div>
-                <p>On page 3, we explore...</p>
+                <div class="comment-header">Insecure direct object references (IDOR)</div>
+                <p">"IDOR are a type of access control vulnerability that arises when an application uses user-supplied input to access objects directly.
+                    Most commonly they are associated with horizontal privilege escalation, but they can also arise in relation to vertical privilege escalation.
+                    IDORs may take different shapes. Some examples include:
+                    <ul class="b">
+                        <li>IDORs that directly reference database objects</li>
+                        <p class="centered-text">
+                            e.g. https://my.domain/customer_account?id=123 <br><br>
+                            Here, the customer number is used directly as a record index in queries that are performed on the back-end database.
+                            If no other controls are in place, an attacker can simply modify the customer_number value, bypassing access controls to view the records of other customers. 
+                        </p>
+                        
+                        
+                        <li>IDORs that directly reference static files</li>
+                        <p class="centered-text">
+                            e.g. https://my.domain/static/secret.txt<br><br>
+                            IDOR vulnerabilities often arise when sensitive resources are located in static files on the server-side filesystem."
+                        </p>
+                      </ul>
+                </p>
+                <p>
+                    Read more: <strong><a href="https://www.spiceworks.com/it-security/vulnerability-management/articles/insecure-direct-object-reference-idor/">IDOR</a></strong>,
+                    <strong><a href="https://portswigger.net/web-security/access-control/idor">Web Security Academy - IDOR</a></strong>
+
+                </p> 
             {% elif query == '4' %}
                 {% if session.get('is_admin') %}
                     <div class="comment-header">Admin-Only  - todo</div>
