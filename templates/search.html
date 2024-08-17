@@ -104,7 +104,7 @@
 
                     <!-- Formularz przesyłania plików -->
                     <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
-                        <label for="file">Upload a .png file:</label>
+                        <label for="file">Upload file (.png only):</label>
                         <input type="file" id="file" name="file" accept=".png" required>
                         <button type="submit">Upload</button>
                     </form>

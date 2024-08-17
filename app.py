@@ -161,7 +161,27 @@ def create_app():
     
 
     @app.route('/uploads/<filename>')
-    def uploaded_file(filename):
+    def photo_display(filename):
         return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-        
+
+
+    @app.route('/upload_file', methods=['POST'])
+    def upload_file():
+        if 'username' not in session or not session.get('is_admin'):
+            flash('You do not have the necessary permissions to perform this action.')
+            return redirect(url_for('broken_acc', search='4'))
+
+        file = request.files['file']
+
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(url_for('broken_acc', search='4'))
+
+        if file and file.filename:
+            filename = file.filename
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('broken_acc', search='4', upload_message='File uploaded successfully!'))
+        else:
+            return redirect(url_for('broken_acc', search='4', upload_message='Invalid file type. Only .png files are allowed.'))
+            
     return app
