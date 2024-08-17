@@ -21,24 +21,23 @@
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <p class="subtitle">What is it all about? </p>
     <p class="ex1">
-        As part of the <strong>Web and mobile application security</strong> course, I created a web application in the form of a blog with many different vulnerabilities. 
-        Your task is to understand how attacks on web applications work and how you can use the vulnerabilities you find to
+        As part of the <strong>Web and mobile application security</strong> course, I created a web application in the form of a blog with many vulnerabilities. 
+        The goal is to show what attacks can be carried out on vulnerable web applications, i.e. how found security holes can be exploited to:
         <ul class="b">
             <li>extract unsecured user data</li>
             <li>gain access to other users' accounts</li>
-            <li>prepare a payload harmful to other users that can be placed on this site </li>
+            <li>prepare a malicious payload for other users that can be placed on this site </li>
           </ul>
         </p>
         <p class="ex1">
-        and so on. The topic of the blog is vulnerabilities that can be exploited in web applications. 
-        It is worthwhile to familiarize yourself with them, as some of them can be found in this application.
+        and so on. The topic of the blog is precisely such vulnerabilities. It is worth familiarizing yourself with them, because some of them can be found in this application.
         <p class="centered-text">
-        Your task is divided into two parts.
+        The task is divided into two parts.
         </p>
     </p>
     <img class="main_image" src="{{ url_for('photo_display', filename='blog_girl.png') }}" alt="Reload to obtain a photo!">
     <p class="subtitle">Part I</p>
-    <p class="ex1">As described above, the application is vulnerable to many different types of attacks. 
+    <p class="ex1">As described above, the application is vulnerable to different types of attacks. 
         I recommend that you familiarize yourself with the vulnerabilities described on this blog, but also look into other available sources. 
         (My recommendation would be <strong><a href="https://portswigger.net/web-security">Web Security Academy</a></strong>). 
         Then try to find these vulnerabilities and expose them.</p>
@@ -47,7 +46,7 @@
     <p class="subtitle">Part II</p>
     <p class="ex1">An additional feature on the blog are hidden flags based on the CTF (Capture-The-Flag) principle. 
         In some places, finding a vulnerability will result in finding a flag (according to the pattern: <strong>flag={string}</strong>).
-        There are <strong>10</strong> flags. 
+        There are <strong>10</strong> flags in total. 
         <p class="centered-text">
             Good luck!
     </p></p>

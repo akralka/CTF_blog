@@ -2,19 +2,20 @@
 
 ## Vulnerable web app named "Blog" with hidden flags!
 
-As part of the Web and mobile application security course, I created a web application in the form of a blog with many different vulnerabilities. The aim is to understand how attacks on web applications work and how you can exploit vulnerabilities you find to
+As part of my engineering thesis, I created a web application in the form of a blog with many vulnerabilities that will be used in the labs of the Web and Mobile Application Security course at my faculty. 
+The goal is to show students what attacks can be carried out on vulnerable web applications, i.e. how found security holes can be exploited to:
 
 - extract unsecured user data
 - gain access to other users' accounts
-- prepare a payload harmful to other users that can be placed on this site
+- prepare a malicious payload for other users that can be placed on this site
 
-and so on. The topic of the blog is vulnerabilities that can be exploited in web applications. It is worthwhile to familiarize with them, as some of them can be found in this application.
+and so on.
 
 
 ## What is the purpose of all this?
-As described above, the application is vulnerable to many different types of attacks. The task is to find these vulnerabilities and expose them.
+As described above, the application is vulnerable to different types of attacks. The task is to find these vulnerabilities and expose them.
 
-An additional feature on the blog are hidden flags based on the CTF (Capture-The-Flag) principle. In some places, finding a vulnerability will result in finding a flag (according to the pattern: flag={string}). There are 10 flags.
+An additional feature on the blog are hidden flags based on the CTF (Capture-The-Flag) principle. In some places, finding a vulnerability will result in finding a flag (according to the pattern: flag={string}). There are 10 flags in total.
 
 > [!NOTE] Each flag consists of text and ONLY one number - if it is in a different form, then something else needs to be done to get the correct flag. Each flag contains a number from 0 to 9.(e.g. flag={Hello the4e!})
 
