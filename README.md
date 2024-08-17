@@ -26,9 +26,21 @@ An additional feature on the blog are hidden flags based on the CTF (Capture-The
 5. The next step is to create a docker container. To do this, use the command: `docker build -t blog_container .`
 6. To start the container with the built image, use the following command: `docker run -d -p 5000:5000 blog_container`
 7. Application will be available at `http://localhost:5000` or `http://127.0.0.1:5000`
-8. Use `docker ps` command to check running containers, then type `docker stop <container_id>` to stop the selected container.
+8. You may use `docker ps` command to check the status of containers.
+9. Type `docker stop <container_id>` to stop the selected container (use `docker images` to check its ID).
+10. If you run the container without the `-d` flag, just use CTRL+C in the terminal to terminate it.
+<br>
+<br>
+
+> [!TIP] I build my image on wsl Ubuntu 22.04. Here's my pre-build image you may use: <br> 
+<!-- - [Download blog_container.tar](link dysk google here) -->
+- Sha256 for `.tar` file: 
+- Sha256 for _docker image_:
+
+After downloading the file, use the following commands to run the container:
+- `docker load -i blog_container.tar` 
+- `docker run -p 5000:5000 blog_container`
+
  ### Good luck!! 
 
-
 ###### P.S. All photos were generated with DALL∙E.
-
