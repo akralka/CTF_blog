@@ -19,7 +19,7 @@ p.margin_top {
     margin-top: 110px;
 }
 
-p.ex1 {  /*tekst na stronie*/
+p.ex1 { 
     margin-left: 28%;
     margin-right: 26%;
     font-size: 16px;
@@ -52,17 +52,17 @@ body {
 /* TASK BAR*/
 .task-bar {
     background-color: #2d2d2d;
-    position: absolute; /* wzgledem innych (1) */
+    position: absolute; 
     justify-content: space-between; 
     top: 80px;
     left: 19.5%;
     width: 63%;
     display: flex;
-    flex-wrap: wrap; /* Elementy się zawijają */
+    flex-wrap: wrap; 
     font-size: 16px;
 }
 
-.task-bar a { /*tekst*/
+.task-bar a { /*text*/
     color: white;
     padding: 21px 23px;
     text-decoration: none;
@@ -113,7 +113,7 @@ body {
 }
 
 /*Login & Sign up*/
-.login-form .form-group { /* gdzie hasło i login*/
+.login-form .form-group { 
     margin-bottom: 11px;
 }
 
@@ -123,7 +123,7 @@ body {
     color: #333;
 }
 
-.login-form input { /*todo*/
+.login-form input { 
     width: 9%;
     margin-right: 80px;
     padding: 10px;
@@ -231,11 +231,10 @@ body {
     border-bottom: 1px solid #cacacad2;
 }
 
-/* Responsywność */
 @media (max-width: 760px) {
 
     .task-bar {
-        flex-direction: column; /* task-bar w kolumne */
+        flex-direction: column; /* task-bar into column */
         position: static;
         width: 100%;
     }

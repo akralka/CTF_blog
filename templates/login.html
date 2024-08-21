@@ -52,13 +52,13 @@
           {% endfor %}
 
       {% elif request.args.get('user') %}
-          <p>Logged in as: {{ request.args.get('user') }}. More information available only to administrators.</p>
+          <p class="centered-text">Logged in as: {{ request.args.get('user') }}. More information available only to administrators.</p>
       {% endif %}
     {% endif %}
 
     {% if admin_message %}
       <div class="admin-message">
-          <p>{{ admin_message }}</p>
+          <p class="centered-text">{{ admin_message }}</p>
       </div>
     {% endif %}
     

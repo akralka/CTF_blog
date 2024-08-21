@@ -58,7 +58,7 @@
     <p class="subtitle">Comments!</p> 
     <div class="comments">
         {% for comment in comments %}
-            <div class="comment"> <!-- safe -> nie wyswietla, ale działa-->
+            <div class="comment"> <!-- safe -> doesn't display but works-->
                 <strong>{{ comment.name }}</strong>: {{ comment.content|safe }}
             </div>    
             {% endfor %}

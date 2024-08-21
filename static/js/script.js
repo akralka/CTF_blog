@@ -1,11 +1,6 @@
-// document.getElementById('myButton').addEventListener('click', function() {
-//     alert('Button clicked!');
-// });
-
 function navigateTo(url) {
     window.location.href = url;
 }
-
 
 function searchResults(event) {
     event.preventDefault(); // Zapobiega przeładowaniu strony!!!

@@ -25,8 +25,7 @@
             <li>Vertical access controls</li>
             <br>
             With vertical access controls, different types of users have access to different application functions. For example, an administrator might be able to modify or delete any user's account, 
-            while an ordinary user has no access to these actions.
-            Vertical access controls can be more fine-grained implementations of security models designed to enforce business policies such as separation of duties and least privilege.<br><br>
+            while an ordinary user has no access to these actions.<br><br>
             <li>Horizontal access controls</li>
             <br>
             With horizontal access controls, different users have access to a subset of resources of the same type.
@@ -35,11 +34,11 @@
     <p class="ex1">
         Examples of broken access controls may be:
         <ul class="b">
-            <li>A website might host sensitive functionality at URLs (e.g. https://my.domain/admin). Even though a regular user won't find this endpoint on a web page,
+            <li>"A website might host sensitive functionality at URLs (e.g. https://my.domain/admin). Even though a regular user won't find this endpoint on a web page,
                 if they try to enter it directly in the URL, the page will be loaded with all its contents </li><br><br>
             <li>The application makes access control decisions based on the submitted value. (e.g. https://my.domain/login?admin=true) </li><br><br>
             <li>A user might access their own account page using the following URL: https://my.domain/myaccount?id=123. 
-                Seeing this, the user may think that since his id is 123, he may be able to access another user's account by entering id=122.   </li>
+                Seeing this, the user may think that since his id is 123, he may be able to access another user's account by entering id=122."   </li>
         </ul>
     </p>
 

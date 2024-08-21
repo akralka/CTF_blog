@@ -74,8 +74,8 @@
                         <li>IDORs that directly reference database objects</li>
                         <p class="centered-text">
                             e.g. https://my.domain/customer_account?id=123 <br><br>
-                            Here, the customer number is used directly as a record index in queries that are performed on the back-end database.
-                            If no other controls are in place, an attacker can simply modify the customer_number value, bypassing access controls to view the records of other customers. 
+                            Here, the id is used directly as a record index in queries that are performed on the back-end database.
+                            If no other controls are in place, an attacker can simply modify the id value, bypassing access controls to view the records of other customers. 
                         </p>
                         
                         
@@ -102,7 +102,6 @@
                           and is also configured to execute them as code. This makes it trivial to create your own web shell on the server."</p>
                           Read more: <strong><a href="https://portswigger.net/web-security/file-upload">Web Security Academy - file-upload</a></strong><br><br>
 
-                    <!-- Formularz przesyłania plików -->
                     <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
                         <label for="file">Upload file (.png only):</label>
                         <input type="file" id="file" name="file" accept=".png" required>

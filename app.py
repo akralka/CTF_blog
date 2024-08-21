@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, send_from_directory, session
-from models import db, User, Comment, Article
+from models import db, User, Comment
 from sqlalchemy import text
 from lxml import etree
 import hashlib
@@ -10,13 +10,12 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] =  "sqlite:///data.db"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
-    app.config['SECRET_KEY'] = 'aaa'
+    app.config['SECRET_KEY'] = 'jksdfk484lsgvsrg89sgeu9fno'
     FLAG_FILE = '/flag.txt'
     # SESSION_COOKIE_HTTPONLY=True,
     # REMEMBER_COOKIE_HTTPONLY=True,
     # SESSION_COOKIE_SAMESITE="Strict",
 
-    # Inicjalizacja bazy danych
     db.init_app(app)
 
     with app.app_context():
@@ -61,7 +60,7 @@ def create_app():
             flash('You must be logged in to view this page.')
             return redirect(url_for('login'))
 
-        # Pobieramy 'search' z URL
+        # 'search' from URL
         query = request.args.get('search')
 
         if query in ['1', '2', '3', '4']:
@@ -162,7 +161,6 @@ def create_app():
                 flash('This login is already taken. Please choose another one.')
                 return redirect(url_for('sign_in'))
 
-            # Dodanie użytkownika do bazy danych
             hashed_password = hashlib.md5(password.encode()).hexdigest()
             new_user = User(login=username, password=hashed_password)
             db.session.add(new_user)
