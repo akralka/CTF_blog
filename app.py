@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, send_from_directory, session
 from models import db, User, Comment, Article
 from sqlalchemy import text
+from lxml import etree
 import hashlib
 
 def create_app():
@@ -10,6 +11,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
     app.config['SECRET_KEY'] = 'aaa'
+    FLAG_FILE = '/flag.txt'
     # SESSION_COOKIE_HTTPONLY=True,
     # REMEMBER_COOKIE_HTTPONLY=True,
     # SESSION_COOKIE_SAMESITE="Strict",
@@ -85,10 +87,22 @@ def create_app():
         return render_template('xss.html', comments=comments)
 
 
-    @app.route('/xxe')
+    @app.route('/xxe', methods=['GET', 'POST'])
     def xxe():
+        if request.method == 'POST':
+            xml_data = request.data.decode('utf-8')
+
+            try:
+                parser = etree.XMLParser(resolve_entities=True)
+                root = etree.fromstring(xml_data.encode(), parser)
+
+                result = etree.tostring(root, encoding='unicode')
+                return jsonify({"result": result})
+            
+            except etree.XMLSyntaxError as e:
+                return jsonify({"error": f"Error parsing XML: {str(e)}"}), 400
+
         return render_template('xxe.html')
-    
 
     @app.route('/about')
     def about():
@@ -176,12 +190,16 @@ def create_app():
         if file.filename == '':
             flash('No selected file')
             return redirect(url_for('broken_acc', search='4'))
-
+                      
         if file and file.filename:
             filename = file.filename
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('broken_acc', search='4', upload_message='File uploaded successfully!'))
+            if not filename.endswith('.png'):
+                return redirect(url_for('broken_acc', search='4', upload_message='flag={great_m8}'))
+            else:
+                return redirect(url_for('broken_acc', search='4', upload_message='File uploaded successfully!'))
+            
         else:
             return redirect(url_for('broken_acc', search='4', upload_message='Invalid file type. Only .png files are allowed.'))
-            
+
     return app
