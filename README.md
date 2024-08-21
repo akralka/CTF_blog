@@ -30,8 +30,6 @@ An additional feature on the blog are hidden flags based on the CTF (Capture-The
 8. You may use `docker ps` command to check the status of containers.
 9. Type `docker stop <container_id>` to stop the selected container (use `docker images` to check its ID).
 10. If you run the container without the `-d` flag, just use CTRL+C in the terminal to terminate it.
-<br>
-<br>
 
 > [!TIP] I build my image on wsl Ubuntu 22.04. Here's my pre-build image you may use: <br> 
 <!-- - [Download blog_container.tar](link dysk google here) -->
@@ -41,8 +39,7 @@ An additional feature on the blog are hidden flags based on the CTF (Capture-The
 After downloading the file, use the following commands to run the container:
 - `docker load -i blog_container.tar` 
 - `docker run -p 5000:5000 blog_container`
-<br>
-<br>
+
 > [!TIP] I recommend using tools such as: <br>
 
 - `exiftool`, `burpsuite`
