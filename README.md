@@ -43,7 +43,10 @@ After downloading the file, use the following commands to run the container:
 - `docker run -p 5000:5000 blog_container`
 <br>
 <br>
-> [!TIP] I recommend using tools such as: <br> `exiftool`, `burpsuite`, [JWT](https://jwt.io/), [cyberchef](https://cyberchef.org/), [payloads](https://github.com/swisskyrepo/PayloadsAllTheThings) 
+> [!TIP] I recommend using tools such as: <br>
+
+- `exiftool`, `burpsuite`
+- [JWT](https://jwt.io/), [cyberchef](https://cyberchef.org/), [payloads](https://github.com/swisskyrepo/PayloadsAllTheThings)
 
  ### Good luck!! 
 
