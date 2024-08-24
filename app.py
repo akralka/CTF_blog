@@ -133,10 +133,10 @@ def create_app():
             if session.get('is_admin'):
                 if user_param == 'admin':
                     return render_template('login.html', admin_message="Oh no! Admin forget to change his password!\n Here's your flag: flag={g0t_ya}")
-            
+                
             if user_param_lower == 'administrator':
                 users = User.query.all()
-                return render_template('login.html', users=users, user=session.get('username'))
+                return render_template('login.html', users=users, user=session.get('username'), admin_message="Oh no! The administrator does not follow the rule of strong passwords!\n Here's your flag: flag={mission_accompli9hed}")
             else:
                 return render_template('login.html', user=session.get('username'))
 
