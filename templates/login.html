@@ -41,6 +41,7 @@
 
     {% if 'username' in session %}
       <p class="centered-text">Hello: {{ session['username'] }}! <a href="{{ url_for('logout') }}">Logout</a></p>
+      <p class="caption" onclick="navigateTo('/change_password')">Change Password</p>
 
       {% set user_param = request.args.get('user', '').lower() %}
       {% if user_param in ['administrator'] %}

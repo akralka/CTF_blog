@@ -171,6 +171,29 @@ def create_app():
         else:
             return render_template('sign_in.html')
     
+    @app.route('/change_password', methods=['GET', 'POST'])
+    def change_password():
+        if 'username' not in session:
+            flash('You must be logged in to change your password.')
+            return redirect(url_for('login'))
+
+        if request.method == 'POST':
+            current_password = request.form.get('current_password')
+            new_password = request.form.get('new_password')
+
+            user = User.query.filter_by(login=session['username']).first()
+            hashed_current_password = hashlib.md5(current_password.encode()).hexdigest()
+
+            if user.password != hashed_current_password:
+                flash('Current password is incorrect.')
+                return redirect(url_for('change_password'))
+
+            user.password = hashlib.md5(new_password.encode()).hexdigest()
+            db.session.commit()
+
+            flash('Password updated successfully.')
+
+        return render_template('change_password.html')
 
     @app.route('/uploads/<filename>')
     def photo_display(filename):
