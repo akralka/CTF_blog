@@ -21,6 +21,18 @@ def create_app():
     with app.app_context():
         db.create_all()
 
+    def get_flag(key):
+        flags_file = '.n'
+
+        if not os.path.exists(flags_file):
+            raise FileNotFoundError(f"Flag file '{flags_file}' not found.")
+
+        with open(flags_file, 'r') as file:
+            for line in file:
+                if line.startswith(key + '='):
+                    return line.split('=', 1)[1].strip()
+        
+        raise KeyError(f"Flag with key '{key}' not found.")
 
     @app.route('/')
     def home():
@@ -66,7 +78,8 @@ def create_app():
         if query in ['1', '2', '3', '4']:
             return render_template('search.html', query=query)
         elif query == '31':
-            return "Oh no! There are a few endpoints left that should no longer be accessible. Good job! Here's your flag: flag={k1nda_sus}"
+            flag = get_flag('endpoint')
+            return "Oh no! There are a few endpoints left that should no longer be accessible. Good job! Here's your flag: flag={" + f"{flag}" + "}" 
         else:
             return render_template('broken_acc.html')  
 
@@ -132,11 +145,13 @@ def create_app():
         if 'username' in session:
             if session.get('is_admin'):
                 if user_param == 'admin':
-                    return render_template('login.html', admin_message="Oh no! Admin forget to change his password!\n Here's your flag: flag={g0t_ya}")
+                    flag = get_flag('admin_flag')
+                    return render_template('login.html', admin_message="Oh no! Admin forget to change his password!\n Here's your flag: flag={" + f"{flag}" + "}")
                 
             if user_param_lower == 'administrator':
                 users = User.query.all()
-                return render_template('login.html', users=users, user=session.get('username'), admin_message="Oh no! The administrator does not follow the rule of strong passwords!\n Here's your flag: flag={mission_accompli9hed}")
+                flag = get_flag('administrator')
+                return render_template('login.html', users=users, user=session.get('username'), admin_message="Oh no! The administrator does not follow the rule of strong passwords!\n Here's your flag: flag={" + f"{flag}" + "}")
             else:
                 return render_template('login.html', user=session.get('username'))
 
@@ -216,7 +231,8 @@ def create_app():
             filename = file.filename
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             if not filename.endswith('.png'):
-                return redirect(url_for('broken_acc', search='4', upload_message='flag={great_m8}'))
+                flag = get_flag('upload')
+                return redirect(url_for('broken_acc', search='4', upload_message='flag={' + f'{flag}' + '}'))
             else:
                 return redirect(url_for('broken_acc', search='4', upload_message='File uploaded successfully!'))
             
