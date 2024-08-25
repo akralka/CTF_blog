@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, send_from_directory, session
-from models import db, User, Comment
+from models import db, User, Comment, Article
 from sqlalchemy import text
 from lxml import etree
 import hashlib
@@ -18,8 +18,63 @@ def create_app():
 
     db.init_app(app)
 
+    def initialize_articles():
+        articles = [
+            {"title": "XSS - cross-site scripting", "url": "/xss"},
+            {"title": "XXE - XML external entity injection", "url": "/xxe"},
+            {"title": "Broken Access Control", "url": "/broken_acc"},
+            {"title": "SQL Injection", "url": "/sqli"},
+        ]
+
+        for article_data in articles:
+            article = Article(title=article_data["title"], url=article_data["url"])
+            db.session.add(article)
+        db.session.commit()
+
+    def initialize_users():
+        if not os.path.isfile('.env'):
+            return
+        users = [
+            {
+                "login": os.getenv("ADMIN_LOGIN"),
+                "password": hashlib.md5(os.getenv("ADMIN_PASSWORD").encode()).hexdigest(),
+                "is_admin": os.getenv("ADMIN_IS_ADMIN") == 'True'
+            },
+            {
+                "login": os.getenv("ADMIN2_LOGIN"),
+                "password": hashlib.md5(os.getenv("ADMIN2_PASSWORD").encode()).hexdigest(),
+                "is_admin": os.getenv("ADMIN2_IS_ADMIN") == 'True'
+            },
+            {
+                "login": os.getenv("USER_LOGIN"),
+                "password": hashlib.md5(os.getenv("USER_PASSWORD").encode()).hexdigest(),
+                "is_admin": os.getenv("USER_IS_ADMIN") == 'True'
+            },
+            {
+                "login": os.getenv("SECRET_LOGIN"),
+                "password": os.getenv("SECRET_PASSWORD"),
+                "is_admin": os.getenv("SECRET_IS_ADMIN") == 'True'
+            }
+        ]
+
+        for user_data in users:
+            if not User.query.filter_by(login=user_data["login"]).first():
+                user = User(
+                    login=user_data["login"],
+                    password=user_data["password"],
+                    is_admin=user_data["is_admin"]
+                )
+                db.session.add(user)
+        db.session.commit()
+
     with app.app_context():
         db.create_all()
+
+        if db.session.query(Article).count() == 0:
+            initialize_articles()
+
+        if not User.query.first():
+            initialize_users()
 
     def get_flag(key):
         flags_file = '.n'
