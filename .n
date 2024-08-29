@@ -1,4 +1,0 @@
-admin_flag=g0t_ya
-administrator=mission_accompli9hed
-upload=great_m8
-endpoint=k1nda_sus
