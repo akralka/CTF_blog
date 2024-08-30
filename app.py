@@ -46,11 +46,6 @@ def create_app():
                 "is_admin": os.getenv("ADMIN2_IS_ADMIN") == 'True'
             },
             {
-                "login": os.getenv("USER_LOGIN"),
-                "password": hashlib.md5(os.getenv("USER_PASSWORD").encode()).hexdigest(),
-                "is_admin": os.getenv("USER_IS_ADMIN") == 'True'
-            },
-            {
                 "login": os.getenv("SECRET_LOGIN"),
                 "password": os.getenv("SECRET_PASSWORD"),
                 "is_admin": os.getenv("SECRET_IS_ADMIN") == 'True'
@@ -80,14 +75,14 @@ def create_app():
         flags_file = '.n'
 
         if not os.path.exists(flags_file):
-            raise FileNotFoundError(f"Flag file '{flags_file}' not found.")
+            raise FileNotFoundError(f"File not found.")
 
         with open(flags_file, 'r') as file:
             for line in file:
                 if line.startswith(key + '='):
                     return line.split('=', 1)[1].strip()
         
-        raise KeyError(f"Flag with key '{key}' not found.")
+        raise KeyError(f"Value not found.")
 
     @app.route('/')
     def home():
@@ -127,7 +122,6 @@ def create_app():
             flash('You must be logged in to view this page.')
             return redirect(url_for('login'))
 
-        # 'search' from URL
         query = request.args.get('search')
 
         if query in ['1', '2', '3', '4']:

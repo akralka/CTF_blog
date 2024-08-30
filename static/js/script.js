@@ -3,7 +3,7 @@ function navigateTo(url) {
 }
 
 function searchResults(event) {
-    event.preventDefault(); // Zapobiega przeładowaniu strony!!!
+    event.preventDefault();
 
     const query = document.getElementById('search-input').value.trim();
     const resultsContainer = document.getElementById('search-res-sqli');
