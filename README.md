@@ -2,12 +2,12 @@
 
 ## Vulnerable web app named "Blog" with hidden flags!
 
-As part of my engineering thesis, I created a web application in the form of a blog with many vulnerabilities that will be used in the labs of the Web and Mobile Application Security course at my faculty. 
+As part of my engineering thesis, I created a vulnerable web application in the form of a blog. This app will be used in the labs of the Web and Mobile Application Security course at my faculty. 
 The goal is to show students what attacks can be carried out on vulnerable web applications, i.e. how found security holes can be exploited to:
 
 - extract unsecured user data
 - gain access to other users' accounts
-- prepare a malicious payload for other users that can be placed on this site
+- prepare a malicious payload for other users that can be placed on the site
 
 and so on.
 
@@ -17,7 +17,7 @@ As described above, the application is vulnerable to different types of attacks.
 
 An additional feature on the blog are hidden flags based on the CTF (Capture-The-Flag) principle. In some places, finding a vulnerability will result in finding a flag (according to the pattern: flag={string}). There are 10 flags in total.
 
-> [!NOTE] Each flag consists of text and ONLY one number - if it is in a different form, then something else needs to be done to get the correct flag. Each flag contains a number from 0 to 9.(e.g. flag={Hello the4e!})
+> [!NOTE] Each flag consists of text and ONLY one number (between 0-9) - if it is in a different form, then something else needs to be done to get the correct flag. (e.g. flag={Hello the4e!})
 
 # Instruction 1:
 1. Make sure you have `Docker` installed on your computer.
