@@ -30,6 +30,8 @@ An additional feature on the blog are hidden flags based on the CTF (Capture-The
 8. You may use `docker ps` command to check the status of containers and its ID.
 9. Type `docker stop <container_id>` to stop the selected container.
 10. If you run the container without the `-d` flag, just use CTRL+C in the terminal to terminate it.
+11. To restart the container type: `docker start <container_id>`
+12. If you want to use a clean container simply use the above `run` command again.
 
 
 # Instruction 2:
@@ -42,6 +44,8 @@ An additional feature on the blog are hidden flags based on the CTF (Capture-The
 6. You may use `docker ps` command to check the status of containers and its ID.
 7. Type `docker stop <container_id>` to stop the selected container.
 8. If you run the container without the `-d` flag, just use CTRL+C in the terminal to terminate it.
+9. To restart the container type: `docker start <container_id>`
+10. If you want to use a clean container simply use the above `run` command again.
 
 
 > [!TIP] I recommend using tools such as: <br>
