@@ -214,8 +214,8 @@ def create_app():
         return redirect(url_for('login'))
 
 
-    @app.route('/sign_in', methods=['GET', 'POST'])
-    def sign_in():
+    @app.route('/sign_up', methods=['GET', 'POST'])
+    def sign_up():
         if request.method == 'POST':
             username = request.form.get('username')
             password = request.form.get('password')
@@ -223,7 +223,7 @@ def create_app():
             existing_user = User.query.filter_by(login=username).first()
             if existing_user:
                 flash('This login is already taken. Please choose another one.')
-                return redirect(url_for('sign_in'))
+                return redirect(url_for('sign_up'))
 
             hashed_password = hashlib.md5(password.encode()).hexdigest()
             new_user = User(login=username, password=hashed_password)
@@ -231,9 +231,9 @@ def create_app():
             db.session.commit()
 
             flash('User added successfully')
-            return redirect(url_for('sign_in'))
+            return redirect(url_for('sign_up'))
         else:
-            return render_template('sign_in.html')
+            return render_template('sign_up.html')
     
     @app.route('/change_password', methods=['GET', 'POST'])
     def change_password():
