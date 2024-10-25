@@ -1,4 +1,4 @@
-# Vulnerable blog!
+# EViL Blog!
 
 ## Vulnerable web app named "EViL Blog" (Extremely VuLnerable blog) with hidden flags!
 
