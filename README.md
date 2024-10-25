@@ -1,6 +1,6 @@
 # Vulnerable blog!
 
-## Vulnerable web app named "Blog" with hidden flags!
+## Vulnerable web app named "EViL Blog" (Extremely VuLnerable blog) with hidden flags!
 
 As part of my engineering thesis, I created a vulnerable web application in the form of a blog. This app will be used in the labs of the Web and Mobile Application Security course at my faculty. 
 The goal is to show students what attacks can be carried out on vulnerable web applications, i.e. how found security holes can be exploited to:
