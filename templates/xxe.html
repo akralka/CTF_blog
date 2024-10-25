@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XSS</title>
+    <title>XXE</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
@@ -16,7 +16,7 @@
         <a href="{{ url_for('sign_up') }}">Sign Up</a>
     </div>
 
-    <h1>Blog!</h1> 
+    <h1>EViL Blog!</h1> 
     <h2>What is XML external entity (XXE) injection?</h2>
     <img class="main_image" src="{{ url_for('photo_display', filename='xxe_2.png') }}" alt="Reload to obtain a photo!">
     <p class="subtitle">XXE</p> 

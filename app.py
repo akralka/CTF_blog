@@ -10,7 +10,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] =  "sqlite:///data.db"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
-    app.config['SECRET_KEY'] = 'jksdfk484lsgvsrg89sgeu9fno'
+    app.config['SECRET_KEY'] = '370w9ejhr3920rj8&8d90ah90f'
     FLAG_FILE = '/flag.txt'
     # SESSION_COOKIE_HTTPONLY=True,
     # REMEMBER_COOKIE_HTTPONLY=True,
