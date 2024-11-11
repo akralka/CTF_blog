@@ -26,6 +26,14 @@ p.ex1 {
     text-align: left;
 }
 
+.ex2 {
+    font-size: 15px;
+    margin-left: 28%;
+    margin-right: 26%;
+    opacity: 0.4;
+    text-align: left;
+}
+
 ul.b {
     margin-left: 28%;
     margin-right: 26%;
